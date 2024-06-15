@@ -17,13 +17,6 @@ async def on_ready():
     print(f"We have logged in as {bot.user}")
 
 
-# @bot.command(name="msg")
-# async def message(ctx, *args):
-#     string = ' '.join(args)
-#     ctx.send(f"se enviaron {len(args)} argumentos")
-#     await ctx.reply(args)
-#
-#
 @bot.command(name="msg")
 async def message(ctx, *, arg):
     await ctx.send(arg)
@@ -34,5 +27,19 @@ async def add(ctx, a:int, b:int):
     await ctx.send(a + b)
 
 
+
+def upper_(argument: str):
+    return argument.upper()
+@bot.command()
+async def up(ctx, *, content:upper_):
+    await ctx.send(content)
+
+@bot.command()
+async def send_image(ctx):
+    with open("src/img.png") as image:
+        await ctx.send(image)
+
+
 bot.run(TOKEN)
 
+    k
