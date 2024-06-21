@@ -1,28 +1,38 @@
-import discord
+from dotenv import load_dotenv
 import os
+import discord
+from discord.ext import commands
+load_dotenv()
 
-TOKEN = os.environ
-print(TOKEN["TOKEN_DISCORD"])
-input()
+
+TOKEN: str = os.getenv("TOKEN_DISCORD")
 
 intents = discord.Intents.default()
-intents.messages_content = True
+intents.message_content = True # Habilita el intent para recibir el contenido de los mensajes
+bot = commands.Bot(command_prefix="^", intents=intents, status="online")
 
-client = discord.Client(intents=intents)
 
-
-@client.event
+@bot.event
 async def on_ready():
-    print(f"We have logged in as {client.user}")
+    print(f"We have logged in as {bot.user}")
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+# @bot.command(name="msg")
+# async def message(ctx, *args):
+#     string = ' '.join(args)
+#     ctx.send(f"se enviaron {len(args)} argumentos")
+#     await ctx.reply(args)
+#
+#
+@bot.command(name="msg")
+async def message(ctx, *, arg):
+    await ctx.send(arg)
 
-    if message.content.startswith("$hello"):
-        await message.channel.send('Hello!')
+
+@bot.command()
+async def add(ctx, a:int, b:int):
+    await ctx.send(a + b)
 
 
-client.run(TOKEN)
+bot.run(TOKEN)
+
