@@ -45,6 +45,10 @@ async def message(ctx):
 
 
 # convertidores
+
+
+
+
 # los convertidores en resumen reciben un o varios argumentos y retorna un tipo de valor distinto
 
 @bot.command()
@@ -60,8 +64,15 @@ def to_upper(argument: str) -> str.upper:
 
 
 @bot.command()
-async def upper_(ctx, *, content: to_upper):
+async def upper_(ctx, content: to_upper):
     await ctx.send(content)
+
+
+# convertidores avanzados
+
+
+
+
 
 
 bot.run(TOKEN)
